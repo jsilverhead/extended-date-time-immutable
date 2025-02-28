@@ -3,6 +3,7 @@
 namespace App\Formatter;
 
 use App\ExtendedDateTimeImmutable;
+use Symfony\Component\HttpFoundation\Exception\JsonException;
 
 final class Formatter
 {
@@ -52,48 +53,15 @@ final class Formatter
     ): string {
         $diff = $coreDateTime->diff($dateTime);
 
-        $localeFile =
-            getcwd() . "/public/locale/TimeMeasuresLocale_" . $locale . ".json";
-        $contentsAsJson = file_get_contents($localeFile);
-        $contentsAsArray = json_decode($contentsAsJson, true);
+        $contents = $this->loadLocaleFileContents($locale);
 
         $diffAsArray = array_filter([
-            0 !== $diff->y
-                ? $diff->y .
-                    ($diff->y === 1
-                        ? " " . $contentsAsArray["years"]["singular"]
-                        : $contentsAsArray["years"]["plural"])
-                : null,
-            0 !== $diff->m
-                ? $diff->m .
-                    ($diff->m === 1
-                        ? " " . $contentsAsArray["months"]["singular"]
-                        : $contentsAsArray["months"]["plural"])
-                : null,
-            0 !== $diff->d
-                ? $diff->d .
-                    ($diff->d === 1
-                        ? " " . $contentsAsArray["days"]["singular"]
-                        : $contentsAsArray["days"]["plural"])
-                : null,
-            0 !== $diff->h
-                ? $diff->h .
-                    ($diff->h === 1
-                        ? " " . $contentsAsArray["hours"]["singular"]
-                        : $contentsAsArray["hours"]["plural"])
-                : null,
-            0 !== $diff->i
-                ? $diff->i .
-                    ($diff->i === 1
-                        ? " " . $contentsAsArray["minutes"]["singular"]
-                        : $contentsAsArray["minutes"]["plural"])
-                : null,
-            0 !== $diff->s
-                ? $diff->s .
-                    ($diff->s === 1
-                        ? " " . $contentsAsArray["seconds"]["singular"]
-                        : $contentsAsArray["seconds"]["plural"])
-                : null,
+            $this->formatUnit($diff->y, $contents["years"]),
+            $this->formatUnit($diff->m, $contents["months"]),
+            $this->formatUnit($diff->d, $contents["days"]),
+            $this->formatUnit($diff->h, $contents["hours"]),
+            $this->formatUnit($diff->i, $contents["minutes"]),
+            $this->formatUnit($diff->s, $contents["seconds"]),
         ]);
 
         $difAsString = implode(" and ", $diffAsArray);
@@ -178,5 +146,38 @@ final class Formatter
             11 => "Ноября",
             12 => "Декабря",
         };
+    }
+
+    private function loadLocaleFileContents(string $locale): array
+    {
+        $localeFile =
+            getcwd() . "/public/locale/TimeMeasuresLocale_" . $locale . ".json";
+
+        if (!file_exists($localeFile)) {
+            throw new \Exception("Locale file not found: " . $localeFile);
+        }
+
+        $contentsAsJson = file_get_contents($localeFile);
+
+        try {
+            $contentsAsArray = json_decode($contentsAsJson, true);
+        } catch (JsonException $e) {
+            throw new \JsonException(
+                "Unable to parse JSON: " . $e->getMessage()
+            );
+        }
+
+        return $contentsAsArray;
+    }
+
+    private function formatUnit(int $value, array $unit): ?string
+    {
+        if ($value === 0) {
+            return null;
+        }
+
+        return $value .
+            " " .
+            ($value === 1 ? $unit["singular"] : $unit["plural"]);
     }
 }
