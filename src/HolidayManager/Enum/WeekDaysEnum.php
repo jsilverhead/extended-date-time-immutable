@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Holidays\Enum;
+namespace App\HolidayManager\Enum;
 
 enum WeekDaysEnum: string
 {

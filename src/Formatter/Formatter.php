@@ -47,44 +47,58 @@ final class Formatter
 
     public function getFullDiffForHumans(
         \DateTimeImmutable $coreDateTime,
-        \DateTimeImmutable $dateTime
+        \DateTimeImmutable $dateTime,
+        string $locale = "en"
     ): string {
         $diff = $coreDateTime->diff($dateTime);
 
+        $localeFile =
+            getcwd() . "/public/locale/TimeMeasuresLocale_" . $locale . ".json";
+        $contentsAsJson = file_get_contents($localeFile);
+        $contentsAsArray = json_decode($contentsAsJson, true);
+
         $diffAsArray = array_filter([
-            0 !== $diff->y ? $diff->y . " years" : null,
-            0 !== $diff->m ? $diff->m . " months" : null,
-            0 !== $diff->d ? $diff->d . " days" : null,
-            0 !== $diff->h ? $diff->h . " hours" : null,
-            0 !== $diff->i ? $diff->i . " minutes" : null,
-            0 !== $diff->s ? $diff->s . " seconds" : null,
+            0 !== $diff->y
+                ? $diff->y .
+                    ($diff->y === 1
+                        ? " " . $contentsAsArray["years"]["singular"]
+                        : $contentsAsArray["years"]["plural"])
+                : null,
+            0 !== $diff->m
+                ? $diff->m .
+                    ($diff->m === 1
+                        ? " " . $contentsAsArray["months"]["singular"]
+                        : $contentsAsArray["months"]["plural"])
+                : null,
+            0 !== $diff->d
+                ? $diff->d .
+                    ($diff->d === 1
+                        ? " " . $contentsAsArray["days"]["singular"]
+                        : $contentsAsArray["days"]["plural"])
+                : null,
+            0 !== $diff->h
+                ? $diff->h .
+                    ($diff->h === 1
+                        ? " " . $contentsAsArray["hours"]["singular"]
+                        : $contentsAsArray["hours"]["plural"])
+                : null,
+            0 !== $diff->i
+                ? $diff->i .
+                    ($diff->i === 1
+                        ? " " . $contentsAsArray["minutes"]["singular"]
+                        : $contentsAsArray["minutes"]["plural"])
+                : null,
+            0 !== $diff->s
+                ? $diff->s .
+                    ($diff->s === 1
+                        ? " " . $contentsAsArray["seconds"]["singular"]
+                        : $contentsAsArray["seconds"]["plural"])
+                : null,
         ]);
 
         $difAsString = implode(" and ", $diffAsArray);
 
         return "Difference in " . $difAsString;
-    }
-
-    public function getFullLocaleDiffForHumans(
-        \DateTimeImmutable $coreDateTime,
-        \DateTimeImmutable $dateTime
-    ): string {
-        $diff = $coreDateTime->diff($dateTime);
-        $diffAsArray = [];
-
-        $diffAsArray[] = $diff->y . " лет";
-        $diffAsArray[] =
-            $diff->m > 1 ? $diff->m . " месяцев" : $diff->m . " месяц";
-        $diffAsArray[] = $diff->d > 1 ? $diff->d . " дней" : $diff->d . " день";
-        $diffAsArray[] = $diff->h > 1 ? $diff->h . " часов" : $diff->h . " час";
-        $diffAsArray[] =
-            $diff->i > 1 ? $diff->i . " минут" : $diff->i . " минуту";
-        $diffAsArray[] =
-            $diff->s > 1 ? $diff->s . " секунд" : $diff->s . " секунду";
-
-        $diffAsString = implode(" и ", $diffAsArray);
-
-        return "Разница в " . $diffAsString;
     }
 
     public function getDate(\DateTimeImmutable $dateTime): string

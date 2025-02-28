@@ -4,7 +4,7 @@ namespace App;
 
 use App\Formatter\Formatter;
 use App\Formatter\TimeZoneFormatter;
-use App\Holidays\HolidayManager;
+use App\HolidayManager\HolidayManager;
 use App\Operations\ArithmeticalOperations;
 use App\Operations\Enum\RangeStepEnum;
 use App\Operations\DateRangeHelper;
@@ -350,20 +350,13 @@ class ExtendedDateTimeImmutable
     }
 
     public function getFullDiffForHumans(
-        ExtendedDateTimeImmutable $dateTime
+        ExtendedDateTimeImmutable $dateTime,
+        string $locale = "en"
     ): string {
         return $this->formatter->getFullDiffForHumans(
             coreDateTime: $this->dateTime,
-            dateTime: $dateTime->dateTime
-        );
-    }
-
-    public function getFullLocaleDiffForHumans(
-        ExtendedDateTimeImmutable $dateTime
-    ): string {
-        return $this->formatter->getFullLocaleDiffForHumans(
-            coreDateTime: $this->dateTime,
-            dateTime: $dateTime->dateTime
+            dateTime: $dateTime->dateTime,
+            locale: $locale
         );
     }
 

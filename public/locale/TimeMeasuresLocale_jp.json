@@ -1,0 +1,26 @@
+{
+  "years": {
+    "singular": "年",
+    "plural": "年"
+  },
+  "months": {
+    "singular": "ヶ月",
+    "plural": "ヶ月"
+  },
+  "days": {
+    "singular": "日",
+    "plural": "日間"
+  },
+  "hours": {
+    "singular": "時間",
+    "plural": "時間"
+  },
+  "minutes": {
+    "singular": "分",
+    "plural": "分"
+  },
+  "seconds": {
+    "singular": "秒",
+    "plural": "秒"
+  }
+}

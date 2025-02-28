@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Holidays;
+namespace App\HolidayManager;
 
-use App\Holidays\Enum\WeekDaysEnum;
+use App\HolidayManager\Enum\WeekDaysEnum;
 
 class HolidayManager
 {

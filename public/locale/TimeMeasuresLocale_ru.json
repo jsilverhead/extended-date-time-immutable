@@ -1,0 +1,26 @@
+{
+  "years": {
+    "singular": "год",
+    "plural": "лет"
+  },
+  "months": {
+    "singular": "месяц",
+    "plural": "месяцев"
+  },
+  "days": {
+    "singular": "день",
+    "plural": "дней"
+  },
+  "hours": {
+    "singular": "час",
+    "plural": "часов"
+  },
+  "minutes": {
+    "singular": "минута",
+    "plural": "минут"
+  },
+  "seconds": {
+    "singular": "секунда",
+    "plural": "секунд"
+  }
+}

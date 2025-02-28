@@ -1,0 +1,26 @@
+{
+  "years": {
+    "singular": "Jahr",
+    "plural": "Jahre"
+  },
+  "months": {
+    "singular": "Monat",
+    "plural": "Monate"
+  },
+  "days": {
+    "singular": "Tag",
+    "plural": "Tage"
+  },
+  "hours": {
+    "singular": "Stunde",
+    "plural": "Stunden"
+  },
+  "minutes": {
+    "singular": "Minute",
+    "plural": "Minuten"
+  },
+  "seconds": {
+    "singular": "Sekunde",
+    "plural": "Sekunden"
+  }
+}

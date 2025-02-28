@@ -71,21 +71,7 @@ class FormatterTest extends TestCase
         );
         $brief = $dateTime->getFullDiffForHumans($diffDateTime);
 
-        self::assertSame("Difference in 1 months and 1 days", $brief);
-    }
-
-    public function testGetFullLocaleDiffForHumans(): void
-    {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T00:00:00");
-        $diffDateTime = ExtendedDateTimeImmutable::create(
-            "2025-10-01T01:00:00"
-        );
-        $brief = $dateTime->getFullLocaleDiffForHumans($diffDateTime);
-
-        $this->assertSame(
-            "Разница в 0 лет и 0 месяц и 0 день и 1 час и 0 минуту и 0 секунду",
-            $brief
-        );
+        self::assertSame("Difference in 1 month and 1 day", $brief);
     }
 
     public function testGetDate(): void

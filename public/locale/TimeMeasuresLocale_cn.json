@@ -1,0 +1,26 @@
+{
+  "years": {
+    "singular": "年",
+    "plural": "年"
+  },
+  "months": {
+    "singular": "个月",
+    "plural": "个月"
+  },
+  "days": {
+    "singular": "天",
+    "plural": "天"
+  },
+  "hours": {
+    "singular": "小时",
+    "plural": "小时"
+  },
+  "minutes": {
+    "singular": "分钟",
+    "plural": "分钟"
+  },
+  "seconds": {
+    "singular": "秒",
+    "plural": "秒"
+  }
+}
