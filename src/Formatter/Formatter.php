@@ -64,6 +64,10 @@ final class Formatter
             $this->formatUnit($diff->s, $contents["seconds"]),
         ]);
 
+        if (empty($diffAsArray)) {
+            return "No difference";
+        }
+
         $difAsString = implode(" and ", $diffAsArray);
 
         return "Difference in " . $difAsString;
