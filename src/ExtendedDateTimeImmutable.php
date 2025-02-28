@@ -42,7 +42,7 @@ class ExtendedDateTimeImmutable
      * @psalm-param string $dateTime
      */
     public static function create(
-        string $dateTimeAsString,
+        string $dateTimeAsString = "now",
         string $timeZone = "UTC"
     ): self {
         try {
