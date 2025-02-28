@@ -5,9 +5,9 @@
 
 ### Создание объекта:
 Объект создаётся путём нескольких статичных методов:
-`ExtendedDateTimeImmutable::create` - аналогично `DateTimeImmutable` принимает строку и пытается сформировать из неё `ExtendedDateTimeImmutable`
-`ExtendedDateTimeImmutable::createRandomDate` - создаёт `ExtendedDateTimeImmutable` с рандомной датой от 1700 до 5000 года.
-`ExtendedDateTimeImmutable::createFromUnixStamp` - принимает Unix int и пытается сфомировать `ExtendedDateTimeImmutable` 
+- `ExtendedDateTimeImmutable::create` - аналогично `DateTimeImmutable` принимает строку и пытается сформировать из неё `ExtendedDateTimeImmutable`
+- `ExtendedDateTimeImmutable::createRandomDate` - создаёт `ExtendedDateTimeImmutable` с рандомной датой от 1700 до 5000 года.
+- `ExtendedDateTimeImmutable::createFromUnixStamp` - принимает Unix int и пытается сфомировать `ExtendedDateTimeImmutable` 
 
 #### Форматирование:
 - `toFormattedDateTime` - Возвращает дату в формате rfc2822
