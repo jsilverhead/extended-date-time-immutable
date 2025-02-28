@@ -5,15 +5,15 @@
 
 ### Создание объекта:
 Объект создаётся путём нескольких статичных методов:
-`ExtendedDateTimeImmutable::create` - принимает строку и пытается сформировать из неё готовый объект
-`ExtendedDateTimeImmutable::createRandomDate` - создаёт объект с рандомной датой от 1700 до 5000 года.
-`ExtendedDateTimeImmutable::createFromUnixStamp` - принимает Unix int и пытается сфомировать из неэ готовый объект 
+`ExtendedDateTimeImmutable::create` - аналогично `DateTimeImmutable` принимает строку и пытается сформировать из неё `ExtendedDateTimeImmutable`
+`ExtendedDateTimeImmutable::createRandomDate` - создаёт `ExtendedDateTimeImmutable` с рандомной датой от 1700 до 5000 года.
+`ExtendedDateTimeImmutable::createFromUnixStamp` - принимает Unix int и пытается сфомировать `ExtendedDateTimeImmutable` 
 
 #### Форматирование:
 - `toFormattedDateTime` - Возвращает дату в формате rfc2822
 - `toISODateTime` - Возвращает дату в формате ISO 8601
 - `getBriefDiffHorHumans` - Возвращает краткий diff в виде строки
-- `getFullDiffForHumans` - Возвращает полный diff в виде строки
+- `getFullDiffForHumans` - Принимает дату для сравнения и локаль в виде строки (по умолчанию en), возвращает локализованный diff
 - `getFullLocaleDiffForHumans` - Возвращает полный diff в виде строки на русском языке
 - `getDate` - Возвращает дату в формате d.m.Y
 - `getDateUSFormat` - Возвращает дату в формате Y.m.d
@@ -63,4 +63,5 @@
 - `whatHoliday` - возвращает, каким праздником является текущая дата
 - `isWeekend` - возвращает, является ли дата выходным (суббота/воскресенье)
 
-В данный момент библиотека работает только с RU, EN локалями (праздники только RU).
+### Создание локалей
+Путём команды `bin/console app:create-locale` можно создавать свои локали для библиотеки.
