@@ -9,6 +9,7 @@ use App\Operations\ArithmeticalOperations;
 use App\Operations\Enum\RangeStepEnum;
 use App\Operations\DateRangeHelper;
 use App\Operations\DateComparator;
+use DateTimeImmutable;
 
 class ExtendedDateTimeImmutable
 {
@@ -532,5 +533,21 @@ class ExtendedDateTimeImmutable
     public function format(string $format): string
     {
         return $this->dateTime->format($format);
+    }
+
+    public static function createFromFormat(string $format, string $value): self
+    {
+        try {
+            $dateTimeImmutable = DateTimeImmutable::createFromFormat(
+                $format,
+                $value
+            );
+        } catch (\InvalidArgumentException $e) {
+            throw new \InvalidArgumentException(
+                "Cannot create date from format: " . $e->getMessage()
+            );
+        }
+
+        return self::createInternal($dateTimeImmutable);
     }
 }
