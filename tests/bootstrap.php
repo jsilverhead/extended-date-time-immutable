@@ -2,6 +2,7 @@
 
 use Symfony\Component\Dotenv\Dotenv;
 
+chdir(__DIR__ . "/..");
 require dirname(__DIR__) . "/vendor/autoload.php";
 
 if (method_exists(Dotenv::class, "bootEnv")) {

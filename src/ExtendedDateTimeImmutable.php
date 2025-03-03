@@ -518,4 +518,19 @@ class ExtendedDateTimeImmutable
     {
         return $this->dateTime->getTimestamp();
     }
+
+    public function getTimeZone(): \DateTimeZone
+    {
+        return $this->dateTime->getTimezone();
+    }
+
+    public function getTimeZoneAsString(): string
+    {
+        return $this->dateTime->getTimezone()->getName();
+    }
+
+    public function format(string $format): string
+    {
+        return $this->dateTime->format($format);
+    }
 }

@@ -101,13 +101,13 @@ class FormatterTest extends TestCase
     public function testGetLastDayOfMonth(): void
     {
         $dateTime = ExtendedDateTimeImmutable::create("2025-02-01T00:00:00");
-        $actualLastDayOfMonth = ExtendedDateTimeImmutable::create(
+        $expectedLastDayOfMonth = ExtendedDateTimeImmutable::create(
             "2025-02-28T00:00:00"
         );
         $formattedLastDayOfMonth = $dateTime->getLastDayOfMonth();
 
         $this->assertSame(
-            expected: $actualLastDayOfMonth->dateTime->format("c"),
+            expected: $expectedLastDayOfMonth->dateTime->format("c"),
             actual: $formattedLastDayOfMonth->dateTime->format("c")
         );
     }
@@ -139,11 +139,11 @@ class FormatterTest extends TestCase
         $dateAsString = "2025-10-01T00:00:00";
         $dateTime = ExtendedDateTimeImmutable::create($dateAsString);
         ClockMock::freeze(new \DateTimeImmutable($dateAsString));
-        $actualUnix = time();
+        $expectedUnix = time();
         ClockMock::reset();
 
         $unix = $dateTime->convertToUnixStamp();
 
-        $this->assertSame(expected: $actualUnix, actual: $unix);
+        $this->assertSame(expected: $expectedUnix, actual: $unix);
     }
 }

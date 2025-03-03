@@ -39,7 +39,7 @@ class DateRangeHelperTest extends TestCase
         $endDateTime = ExtendedDateTimeImmutable::create("2025-01-05");
         $step = RangeStepEnum::DAY;
 
-        $actualRangeArray = [
+        $expectedRangeArray = [
             0 => "2025-01-01",
             1 => "2025-01-02",
             2 => "2025-01-03",
@@ -53,6 +53,6 @@ class DateRangeHelperTest extends TestCase
         );
 
         $this->assertCount(5, $rangeArray);
-        $this->assertCount(0, array_diff($rangeArray, $actualRangeArray));
+        $this->assertCount(0, array_diff($rangeArray, $expectedRangeArray));
     }
 }

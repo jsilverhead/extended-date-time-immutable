@@ -214,11 +214,11 @@ class ArithmeticalOperationsTest extends TestCase
         $age = $birthDate->getAge();
         ClockMock::reset();
 
-        $actualAge = [
+        $expectedAge = [
             "years" => 38,
             "months" => 9,
         ];
 
-        $this->assertCount(0, array_diff($actualAge, $age));
+        $this->assertCount(0, array_diff($expectedAge, $age));
     }
 }

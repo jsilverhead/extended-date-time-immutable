@@ -49,4 +49,26 @@ class TimeZoneFormatterTest extends TestCase
             $dateTime->dateTime->format("Y-m-d H:i:s")
         );
     }
+
+    public function testGetTimezoneSuccess(): void
+    {
+        $dateTime = ExtendedDateTimeImmutable::create();
+        $timeZone = $dateTime->getTimeZone();
+
+        $this->assertInstanceOf(
+            expected: DateTimeZone::class,
+            actual: $timeZone
+        );
+    }
+
+    public function testGetTimezoneAsString(): void
+    {
+        $expectedTimeZone = "Europe/Paris";
+        $dateTime = ExtendedDateTimeImmutable::create(
+            timeZone: $expectedTimeZone
+        );
+        $timeZone = $dateTime->getTimeZoneAsString();
+
+        $this->assertSame(expected: $expectedTimeZone, actual: $timeZone);
+    }
 }
