@@ -23,7 +23,7 @@ class CreateLocaleCommand extends Command
         /** @psalm-var QuestionHelper $helper */
         $questionHelper = $this->getHelper("question");
         $localeNameQuestion = new Question(
-            "Add locale name (1-3 letters max): "
+            "Add locale name (1-4 letters max): "
         );
         $yearSingularQuestion = new Question(
             "How the year is called in singular (10 letters max):"
@@ -77,7 +77,7 @@ class CreateLocaleCommand extends Command
         if (
             !is_string($localeName) ||
             strlen($localeName) < 1 ||
-            strlen($localeName) > 3
+            strlen($localeName) > 4
         ) {
             $output->writeln("<error>Locale name is invalid</error>");
             return Command::FAILURE;

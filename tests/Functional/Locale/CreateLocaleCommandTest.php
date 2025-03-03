@@ -16,7 +16,7 @@ class CreateLocaleCommandTest extends KernelTestCase
         $commandTester = new CommandTester($command);
 
         $commandTester->setInputs([
-            "bg",
+            "test",
             "year",
             "years",
             "month",
@@ -37,5 +37,7 @@ class CreateLocaleCommandTest extends KernelTestCase
         $commandTester->execute([]);
 
         $this->assertSame(expected: 0, actual: $commandTester->getStatusCode());
+
+        unlink(getcwd() . "/public/locale/TimeMeasuresLocale_test.json");
     }
 }
