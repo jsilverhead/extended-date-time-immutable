@@ -91,4 +91,18 @@ class CreateExtendedDateTimeImmutableTest extends TestCase
             actual: $newExtendedDateTimeImmutable->dateTime->format("c")
         );
     }
+
+    public function testCreateFromFormatSuccess(): void
+    {
+        $format = "j-M-Y";
+        $date = "15-Feb-2009";
+
+        $dateTime = ExtendedDateTimeImmutable::createFromFormat($format, $date);
+
+        $this->assertInstanceOf(
+            expected: ExtendedDateTimeImmutable::class,
+            actual: $dateTime
+        );
+        $this->assertSame(expected: $date, actual: $dateTime->format("d-M-Y"));
+    }
 }
