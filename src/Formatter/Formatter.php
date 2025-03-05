@@ -119,37 +119,17 @@ final class Formatter
         return $lastDay->dateTime->format("Y-m-d");
     }
 
-    // TODO: Сделай разные локали (заебёшься)
-    public function getLocaleStringDate(\DateTimeImmutable $dateTime): string
-    {
+    public function getLocaleStringDate(
+        \DateTimeImmutable $dateTime,
+        string $locale = "en"
+    ): string {
         $year = (int) $dateTime->format("Y");
-        $month = (int) $dateTime->format("m");
+        $month = $dateTime->format("F");
         $day = (int) $dateTime->format("d");
 
-        return $day .
-            " " .
-            $this->getLocaleMonthName($month) .
-            " " .
-            $year .
-            " года";
-    }
+        $localeContents = $this->loadLocaleFileContents($locale);
 
-    private function getLocaleMonthName(int $month): string
-    {
-        return match ($month) {
-            1 => "Января",
-            2 => "Февраля",
-            3 => "Марта",
-            4 => "Апреля",
-            5 => "Мая",
-            6 => "Июня",
-            7 => "Июля",
-            8 => "Августа",
-            9 => "Сентября",
-            10 => "Октября",
-            11 => "Ноября",
-            12 => "Декабря",
-        };
+        return $day . $localeContents[$month] . " " . $year;
     }
 
     private function loadLocaleFileContents(string $locale): array

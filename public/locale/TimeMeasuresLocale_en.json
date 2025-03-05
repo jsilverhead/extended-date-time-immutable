@@ -22,5 +22,17 @@
   "seconds": {
     "singular": "second",
     "plural": "seconds"
-  }
+  },
+  "January": " of January",
+  "February": " of February",
+  "March": " of March",
+  "April": " of April",
+  "May": " of May",
+  "June": " of June",
+  "July": " of July",
+  "August": " of August",
+  "September": " of September",
+  "October": " of October",
+  "November": " of November",
+  "December": " of December"
 }

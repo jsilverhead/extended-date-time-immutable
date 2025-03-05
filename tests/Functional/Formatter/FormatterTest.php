@@ -126,10 +126,10 @@ class FormatterTest extends TestCase
     public function testGetLocaleStringDate(): void
     {
         $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T00:00:00");
-        $localeDateString = $dateTime->getLocaleStringDate();
+        $localeDateString = $dateTime->getLocaleStringDate("ru");
 
         $this->assertSame(
-            expected: "1 Октября 2025 года",
+            expected: "1 Октября 2025",
             actual: $localeDateString
         );
     }

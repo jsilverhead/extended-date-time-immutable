@@ -22,5 +22,17 @@
   "seconds": {
     "singular": "segundo",
     "plural": "segundos"
-  }
+  },
+  "January": " de enero",
+  "February": " de febrero",
+  "March": " de marzo",
+  "April": " de abril",
+  "May": " de mayo",
+  "June": " de junio",
+  "July": " de julio",
+  "August": " de agosto",
+  "September": " de septiembre",
+  "October": " de octubre",
+  "November": " de noviembre",
+  "December": " de diciembre"
 }

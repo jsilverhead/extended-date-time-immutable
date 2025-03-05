@@ -26,6 +26,9 @@ class SilverHeadDateTimeImmutable
     private const DECADE = 10;
     private const CENTURY = 100;
 
+    private const MIN_YEAR = 1970;
+    private const MAX_YEAR = 5000;
+
     private const MAX_UNIX_STAMP = 4102444800; // Jan 1, 2100
 
     private function __construct(\DateTimeImmutable $datetime)
@@ -40,7 +43,8 @@ class SilverHeadDateTimeImmutable
     }
 
     /**
-     * @psalm-param string $dateTime
+     * @psalm-param non-empty-string $dateTime
+     * @psalm-param non-empty-string $timeZone
      */
     public static function create(
         string $dateTimeAsString = "now",
@@ -386,9 +390,12 @@ class SilverHeadDateTimeImmutable
         return $this->formatter->getLastDayOfMonthAsString($this->dateTime);
     }
 
-    public function getLocaleStringDate(): string
+    public function getLocaleStringDate(string $locale = "en"): string
     {
-        return $this->formatter->getLocaleStringDate($this->dateTime);
+        return $this->formatter->getLocaleStringDate(
+            dateTime: $this->dateTime,
+            locale: $locale
+        );
     }
 
     public function isBefore(SilverHeadDateTimeImmutable $dateTime): bool
@@ -449,8 +456,8 @@ class SilverHeadDateTimeImmutable
     }
 
     public static function createRandomDate(
-        int $fromYear = 1700,
-        int $toYear = 5000
+        int $fromYear = self::MIN_YEAR,
+        int $toYear = self::MAX_YEAR
     ): self {
         $randomDateTime = self::calculateRandomDate(
             fromYear: $fromYear,

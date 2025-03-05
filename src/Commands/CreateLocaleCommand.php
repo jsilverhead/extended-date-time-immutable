@@ -61,6 +61,42 @@ class CreateLocaleCommand extends Command
         $secondPluralQuestion = new Question(
             "How the second is called in plural (10 letters max):"
         );
+        $januaryQuestion = new Question(
+            "How January is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
+        $februaryQuestion = new Question(
+            "How February is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
+        $marchQuestion = new Question(
+            "How March is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
+        $aprilQuestion = new Question(
+            "How April is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
+        $mayQuestion = new Question(
+            "How May is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
+        $juneQuestion = new Question(
+            "How June is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
+        $julyQuestion = new Question(
+            "How July is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
+        $augustQuestion = new Question(
+            "How August is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
+        $septemberQuestion = new Question(
+            "How September is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
+        $octoberQuestion = new Question(
+            "How October is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
+        $novemberQuestion = new Question(
+            "How November is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
+        $decemberQuestion = new Question(
+            "How December is called in this language (with spaces if necessary. ex: ' de janeiro'):"
+        );
 
         $output->writeln("<info>Create a new time measure locale</info>");
         $localeName = $questionHelper->ask(
@@ -69,18 +105,13 @@ class CreateLocaleCommand extends Command
             $localeNameQuestion
         );
 
-        if (empty($localeName)) {
-            $output->writeln("<error>Locale name can't be empty</error>");
-            return Command::FAILURE;
-        }
-
-        if (
-            !is_string($localeName) ||
-            strlen($localeName) < 1 ||
-            strlen($localeName) > 4
-        ) {
-            $output->writeln("<error>Locale name is invalid</error>");
-            return Command::FAILURE;
+        try {
+            $this->validateLocaleName(name: $localeName);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
         }
 
         $yearSingularAnswer = $questionHelper->ask(
@@ -89,7 +120,14 @@ class CreateLocaleCommand extends Command
             $yearSingularQuestion
         );
 
-        $this->validateLocale(locale: $yearSingularAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $yearSingularAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $yearPluralAnswer = $questionHelper->ask(
             $input,
@@ -97,7 +135,14 @@ class CreateLocaleCommand extends Command
             $yearPluralQuestion
         );
 
-        $this->validateLocale(locale: $yearPluralAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $yearPluralAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $monthSingularAnswer = $questionHelper->ask(
             $input,
@@ -105,7 +150,14 @@ class CreateLocaleCommand extends Command
             $monthSingularQuestion
         );
 
-        $this->validateLocale(locale: $monthSingularAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $monthSingularAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $monthPluralAnswer = $questionHelper->ask(
             $input,
@@ -113,7 +165,14 @@ class CreateLocaleCommand extends Command
             $monthPluralQuestion
         );
 
-        $this->validateLocale(locale: $monthPluralAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $monthPluralAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $daySingularAnswer = $questionHelper->ask(
             $input,
@@ -121,7 +180,14 @@ class CreateLocaleCommand extends Command
             $daySingularQuestion
         );
 
-        $this->validateLocale(locale: $daySingularAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $daySingularAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $dayPluralAnswer = $questionHelper->ask(
             $input,
@@ -129,7 +195,14 @@ class CreateLocaleCommand extends Command
             $dayPluralQuestion
         );
 
-        $this->validateLocale(locale: $dayPluralAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $dayPluralAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $hourSingularAnswer = $questionHelper->ask(
             $input,
@@ -137,7 +210,14 @@ class CreateLocaleCommand extends Command
             $hourSingularQuestion
         );
 
-        $this->validateLocale(locale: $hourSingularAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $hourSingularAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $hourPluralAnswer = $questionHelper->ask(
             $input,
@@ -145,7 +225,14 @@ class CreateLocaleCommand extends Command
             $hourPluralQuestion
         );
 
-        $this->validateLocale(locale: $hourPluralAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $hourPluralAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $minuteSingularAnswer = $questionHelper->ask(
             $input,
@@ -153,7 +240,14 @@ class CreateLocaleCommand extends Command
             $minuteSingularQuestion
         );
 
-        $this->validateLocale(locale: $minuteSingularAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $minuteSingularAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $minutePluralAnswer = $questionHelper->ask(
             $input,
@@ -161,7 +255,14 @@ class CreateLocaleCommand extends Command
             $minutePluralQuestion
         );
 
-        $this->validateLocale(locale: $minutePluralAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $minutePluralAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $secondSingularAnswer = $questionHelper->ask(
             $input,
@@ -169,7 +270,14 @@ class CreateLocaleCommand extends Command
             $secondSingularQuestion
         );
 
-        $this->validateLocale(locale: $secondSingularAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $secondSingularAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $secondPluralAnswer = $questionHelper->ask(
             $input,
@@ -177,7 +285,170 @@ class CreateLocaleCommand extends Command
             $secondPluralQuestion
         );
 
-        $this->validateLocale(locale: $secondPluralAnswer, output: $output);
+        try {
+            $this->validateLocale(locale: $secondPluralAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $januaryAnswer = $questionHelper->ask(
+            $input,
+            $output,
+            $januaryQuestion
+        );
+
+        try {
+            $this->validateLocale(locale: $januaryAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $februaryAnswer = $questionHelper->ask(
+            $input,
+            $output,
+            $februaryQuestion
+        );
+
+        try {
+            $this->validateLocale(locale: $februaryAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $marchAnswer = $questionHelper->ask($input, $output, $marchQuestion);
+
+        try {
+            $this->validateLocale(locale: $marchAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $aprilAnswer = $questionHelper->ask($input, $output, $aprilQuestion);
+
+        try {
+            $this->validateLocale(locale: $aprilAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $mayAnswer = $questionHelper->ask($input, $output, $mayQuestion);
+
+        try {
+            $this->validateLocale(locale: $mayAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $juneAnswer = $questionHelper->ask($input, $output, $juneQuestion);
+
+        try {
+            $this->validateLocale(locale: $juneAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $julyAnswer = $questionHelper->ask($input, $output, $julyQuestion);
+
+        try {
+            $this->validateLocale(locale: $julyAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $augustAnswer = $questionHelper->ask($input, $output, $augustQuestion);
+
+        try {
+            $this->validateLocale(locale: $augustAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $septemberAnswer = $questionHelper->ask(
+            $input,
+            $output,
+            $septemberQuestion
+        );
+
+        try {
+            $this->validateLocale(locale: $septemberAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $octoberAnswer = $questionHelper->ask(
+            $input,
+            $output,
+            $octoberQuestion
+        );
+
+        try {
+            $this->validateLocale(locale: $octoberAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $novemberAnswer = $questionHelper->ask(
+            $input,
+            $output,
+            $novemberQuestion
+        );
+
+        try {
+            $this->validateLocale(locale: $novemberAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
+
+        $decemberAnswer = $questionHelper->ask(
+            $input,
+            $output,
+            $decemberQuestion
+        );
+
+        try {
+            $this->validateLocale(locale: $decemberAnswer);
+        } catch (\InvalidArgumentException $e) {
+            $output->writeln(
+                "<error>Invalid locale</error>: " . $e->getMessage()
+            );
+            return Command::INVALID;
+        }
 
         $contents = [
             "years" => [
@@ -201,9 +472,21 @@ class CreateLocaleCommand extends Command
                 "plural" => $minutePluralAnswer,
             ],
             "seconds" => [
-                "singular" => $minuteSingularAnswer,
-                "plural" => $minutePluralAnswer,
+                "singular" => $secondSingularAnswer,
+                "plural" => $secondPluralAnswer,
             ],
+            "january" => $januaryAnswer,
+            "february" => $februaryAnswer,
+            "march" => $marchAnswer,
+            "april" => $aprilAnswer,
+            "may" => $mayAnswer,
+            "june" => $juneAnswer,
+            "july" => $julyAnswer,
+            "august" => $augustAnswer,
+            "september" => $septemberAnswer,
+            "october" => $octoberAnswer,
+            "november" => $novemberAnswer,
+            "december" => $decemberAnswer,
         ];
 
         $directory = getcwd() . "/public/locale";
@@ -214,37 +497,46 @@ class CreateLocaleCommand extends Command
 
         $file = $directory . "/TimeMeasuresLocale_" . $localeName . ".json";
 
-        file_put_contents(
-            $file,
-            json_encode($contents, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-        );
+        if (
+            file_put_contents(
+                $file,
+                json_encode(
+                    $contents,
+                    JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
+                )
+            ) === false
+        ) {
+            $output->writeln("<error>Failed to write locale file</error>");
+            return self::FAILURE;
+        }
 
         $output->writeln("<info>Locale successfully created</info>");
         return Command::SUCCESS;
     }
 
-    private function validateLocale(
-        string $locale,
-        OutputInterface $output
-    ): ?int {
-        if (empty($locale)) {
-            $output->writeln("<error>Locale can not be empty</error>");
-            return Command::FAILURE;
-        }
-
-        if (!is_string($locale)) {
-            $output->writeln("<error>Locale should be a string</error>");
-
-            return Command::FAILURE;
+    private function validateLocale(string $locale): void
+    {
+        if ("" === $locale) {
+            throw new \InvalidArgumentException("Locale can't be empty");
         }
 
         if (strlen($locale) < 1 || strlen($locale) > 10) {
-            $output->writeln(
-                "<error>Locale can not less than 1 and bigger than 10 letters long</error>"
+            throw new \InvalidArgumentException(
+                "Locale length must be between 1 and 10 characters"
             );
-            return Command::FAILURE;
+        }
+    }
+
+    private function validateLocaleName(string $name): void
+    {
+        if ("" === $name) {
+            throw new \InvalidArgumentException("Locale name can not be empty");
         }
 
-        return null;
+        if (strlen($name) < 1 || strlen($name) > 4) {
+            throw new \InvalidArgumentException(
+                "Locale name length must be between 1 and 4 characters"
+            );
+        }
     }
 }

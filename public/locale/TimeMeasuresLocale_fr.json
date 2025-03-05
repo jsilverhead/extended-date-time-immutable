@@ -22,5 +22,17 @@
   "seconds": {
     "singular": "seconde",
     "plural": "secondes"
-  }
+  },
+  "January": " er janvier",
+  "February": " er février",
+  "March": " er mars",
+  "April": " er avril",
+  "May": " er mai",
+  "June": " er juin",
+  "July": " er juillet",
+  "August": " er août",
+  "September": " er septembre",
+  "October": " er octobre",
+  "November": " er novembre",
+  "December": " er décembre"
 }
