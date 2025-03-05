@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional\Static;
 
-use App\ExtendedDateTimeImmutable;
+use App\SilverHeadDateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use SlopeIt\ClockMock\ClockMock;
 
@@ -11,7 +11,7 @@ class CreateExtendedDateTimeImmutableTest extends TestCase
     public function testCreateExtendedDateTimeImmutableSuccess(): void
     {
         $dateAsString = "2020-01-01T00:00:00+00:00";
-        $extendedDateTimeImmutable = ExtendedDateTimeImmutable::create(
+        $extendedDateTimeImmutable = SilverHeadDateTimeImmutable::create(
             $dateAsString
         );
 
@@ -24,7 +24,7 @@ class CreateExtendedDateTimeImmutableTest extends TestCase
     public function testCreateExtendedDateTimeImmutableWithDateSuccess(): void
     {
         $dateAsString = "2020-01-01";
-        $extendedDateTimeImmutable = ExtendedDateTimeImmutable::create(
+        $extendedDateTimeImmutable = SilverHeadDateTimeImmutable::create(
             $dateAsString
         );
 
@@ -38,12 +38,12 @@ class CreateExtendedDateTimeImmutableTest extends TestCase
     {
         $invalidDateTime = "Christmas";
         $this->expectException(\InvalidArgumentException::class);
-        ExtendedDateTimeImmutable::create($invalidDateTime);
+        SilverHeadDateTimeImmutable::create($invalidDateTime);
     }
 
     public function testCreateRandomExtendedDateTimeImmutableSuccess(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::createRandomDate();
+        $dateTime = SilverHeadDateTimeImmutable::createRandomDate();
 
         $dateAsArray = explode(separator: ".", string: $dateTime->getDate());
 
@@ -82,7 +82,7 @@ class CreateExtendedDateTimeImmutableTest extends TestCase
         $checkDate = new \DateTimeImmutable();
         ClockMock::reset();
 
-        $newExtendedDateTimeImmutable = ExtendedDateTimeImmutable::createFromUnixStamp(
+        $newExtendedDateTimeImmutable = SilverHeadDateTimeImmutable::createFromUnixStamp(
             $unixStamp
         );
 
@@ -97,10 +97,13 @@ class CreateExtendedDateTimeImmutableTest extends TestCase
         $format = "j-M-Y";
         $date = "15-Feb-2009";
 
-        $dateTime = ExtendedDateTimeImmutable::createFromFormat($format, $date);
+        $dateTime = SilverHeadDateTimeImmutable::createFromFormat(
+            $format,
+            $date
+        );
 
         $this->assertInstanceOf(
-            expected: ExtendedDateTimeImmutable::class,
+            expected: SilverHeadDateTimeImmutable::class,
             actual: $dateTime
         );
         $this->assertSame(expected: $date, actual: $dateTime->format("d-M-Y"));

@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional\Operations;
 
-use App\ExtendedDateTimeImmutable;
+use App\SilverHeadDateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use SlopeIt\ClockMock\ClockMock;
 
@@ -10,7 +10,7 @@ class ArithmeticalOperationsTest extends TestCase
 {
     public function testAddHours(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $summedDateTime = $dateTime->addHours(1);
 
         $this->assertSame(
@@ -21,7 +21,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testSubHours(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $subbedDateTime = $dateTime->subHours(1);
 
         $this->assertSame(
@@ -32,7 +32,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testAddMinutes(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $summedDateTime = $dateTime->addMinutes(1);
 
         $this->assertSame(
@@ -43,7 +43,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testSubMinutes(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $subbedDateTime = $dateTime->subMinutes(1);
 
         $this->assertSame(
@@ -54,7 +54,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testAddSeconds(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $summedDateTime = $dateTime->addSeconds(1);
 
         $this->assertSame(
@@ -65,7 +65,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testSubSeconds(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $subbedDateTime = $dateTime->subSeconds(1);
 
         $this->assertSame(
@@ -76,7 +76,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testAddDays(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $summedDateTime = $dateTime->addDays(1);
 
         $this->assertSame(
@@ -87,7 +87,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testSubDays(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $subbedDateTime = $dateTime->subDays(1);
 
         $this->assertSame(
@@ -98,7 +98,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testAddWeeks(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $summedDateTime = $dateTime->addWeeks(1);
 
         $this->assertSame(
@@ -109,7 +109,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testSubWeeks(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $subbedDateTime = $dateTime->subWeeks(1);
 
         $this->assertSame(
@@ -120,7 +120,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testAddMonths(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $summedDateTime = $dateTime->addMonths(1);
 
         $this->assertSame(
@@ -131,7 +131,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testSubMonths(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $subbedDateTime = $dateTime->subMonths(1);
 
         $this->assertSame(
@@ -142,7 +142,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testAddYears(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $summedDateTime = $dateTime->addYears(1);
 
         $this->assertSame(
@@ -153,7 +153,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testSubYears(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $subbedDateTime = $dateTime->subYears(1);
 
         $this->assertSame(
@@ -164,7 +164,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testAddDecade(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $summedDateTime = $dateTime->addDecade();
 
         $this->assertSame(
@@ -175,7 +175,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testSubDecade(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $subbedDateTime = $dateTime->subDecade();
 
         $this->assertSame(
@@ -186,7 +186,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testAddCentury(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $summedDateTime = $dateTime->addCentury();
 
         $this->assertSame(
@@ -197,7 +197,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testSubCentury(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:00:00");
         $subbedDateTime = $dateTime->subCentury();
 
         $this->assertSame(
@@ -208,7 +208,7 @@ class ArithmeticalOperationsTest extends TestCase
 
     public function testGetAgeSuccess(): void
     {
-        $birthDate = ExtendedDateTimeImmutable::create("1986-05-20T12:00:00");
+        $birthDate = SilverHeadDateTimeImmutable::create("1986-05-20T12:00:00");
 
         ClockMock::freeze(new \DateTimeImmutable("2025-02-27T12:00:00"));
         $age = $birthDate->getAge();

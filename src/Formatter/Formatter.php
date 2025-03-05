@@ -2,7 +2,7 @@
 
 namespace App\Formatter;
 
-use App\ExtendedDateTimeImmutable;
+use App\SilverHeadDateTimeImmutable;
 use Symfony\Component\HttpFoundation\Exception\JsonException;
 
 final class Formatter
@@ -90,18 +90,18 @@ final class Formatter
 
     public function getLastDayOfMonth(
         \DateTimeImmutable $dateTime
-    ): ExtendedDateTimeImmutable {
+    ): SilverHeadDateTimeImmutable {
         $year = (int) $dateTime->format("Y");
         $month = (int) $dateTime->format("m");
 
         try {
-            $firstDayOfMonth = ExtendedDateTimeImmutable::create(
+            $firstDayOfMonth = SilverHeadDateTimeImmutable::create(
                 "{$year}-{$month}-01"
             );
             $lastDay = $firstDayOfMonth->dateTime->modify(
                 "last day of this month"
             );
-            $lastDayExtended = ExtendedDateTimeImmutable::create(
+            $lastDayExtended = SilverHeadDateTimeImmutable::create(
                 $lastDay->format("Y-m-d")
             );
         } catch (\Exception $e) {

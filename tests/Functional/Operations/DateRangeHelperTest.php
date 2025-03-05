@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional\Operations;
 
-use App\ExtendedDateTimeImmutable;
+use App\SilverHeadDateTimeImmutable;
 use App\Operations\Enum\RangeStepEnum;
 use PHPUnit\Framework\TestCase;
 
@@ -10,11 +10,11 @@ class DateRangeHelperTest extends TestCase
 {
     public function testGetRangeArraySuccess(): void
     {
-        $initialDateTime = ExtendedDateTimeImmutable::create("2025-01-01");
-        $endDateTime = ExtendedDateTimeImmutable::create("2025-01-05");
+        $initialDateTime = SilverHeadDateTimeImmutable::create("2025-01-01");
+        $endDateTime = SilverHeadDateTimeImmutable::create("2025-01-05");
         $step = RangeStepEnum::DAY;
 
-        /** @psalm-var array<int,ExtendedDateTimeImmutable> $rangeArray */
+        /** @psalm-var array<int,SilverHeadDateTimeImmutable> $rangeArray */
         $rangeArray = $initialDateTime->getRangeArray(
             endDateTime: $endDateTime,
             step: $step
@@ -23,7 +23,7 @@ class DateRangeHelperTest extends TestCase
         $this->assertCount(5, $rangeArray);
 
         foreach ($rangeArray as $key => $date) {
-            $this->assertTrue($date instanceof ExtendedDateTimeImmutable);
+            $this->assertTrue($date instanceof SilverHeadDateTimeImmutable);
 
             if (0 !== $key) {
                 $this->assertTrue(
@@ -35,8 +35,8 @@ class DateRangeHelperTest extends TestCase
 
     public function testGetRangeArrayOfStringsSuccess(): void
     {
-        $initialDateTime = ExtendedDateTimeImmutable::create("2025-01-01");
-        $endDateTime = ExtendedDateTimeImmutable::create("2025-01-05");
+        $initialDateTime = SilverHeadDateTimeImmutable::create("2025-01-01");
+        $endDateTime = SilverHeadDateTimeImmutable::create("2025-01-05");
         $step = RangeStepEnum::DAY;
 
         $expectedRangeArray = [

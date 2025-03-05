@@ -2,36 +2,36 @@
 
 namespace App\Operations;
 
-use App\ExtendedDateTimeImmutable;
+use App\SilverHeadDateTimeImmutable;
 use DateTimeImmutable;
 
 class DateComparator
 {
     public function isBefore(
         DateTimeImmutable $coreDate,
-        ExtendedDateTimeImmutable $matchingDate
+        SilverHeadDateTimeImmutable $matchingDate
     ): bool {
         return $coreDate < $matchingDate->dateTime;
     }
 
     public function isAfter(
         DateTimeImmutable $coreDate,
-        ExtendedDateTimeImmutable $matchingDate
+        SilverHeadDateTimeImmutable $matchingDate
     ): bool {
         return $coreDate > $matchingDate->dateTime;
     }
 
     public function isSame(
         DateTimeImmutable $coreDate,
-        ExtendedDateTimeImmutable $matchingDate
+        SilverHeadDateTimeImmutable $matchingDate
     ): bool {
         return $coreDate->format("c") === $matchingDate->dateTime->format("c");
     }
 
     public function isInRange(
         DateTimeImmutable $initialDateTime,
-        ExtendedDateTimeImmutable $startDateTime,
-        ExtendedDateTimeImmutable $endDateTime
+        SilverHeadDateTimeImmutable $startDateTime,
+        SilverHeadDateTimeImmutable $endDateTime
     ): bool {
         if ($startDateTime->dateTime > $endDateTime->dateTime) {
             throw new \InvalidArgumentException(

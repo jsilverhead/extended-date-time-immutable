@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional\Formatter;
 
-use App\ExtendedDateTimeImmutable;
+use App\SilverHeadDateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use SlopeIt\ClockMock\ClockMock;
 
@@ -10,7 +10,7 @@ class FormatterTest extends TestCase
 {
     public function testToFormattedDateTime(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T00:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T00:00:00");
         $formattedDateTime = $dateTime->toFormattedDateTime();
 
         self::assertSame(
@@ -21,7 +21,7 @@ class FormatterTest extends TestCase
 
     public function testToIsDateTime(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T00:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T00:00:00");
         $formattedDateTime = $dateTime->toISODateTime();
 
         self::assertSame("2025-10-01T00:00:00+00:00", $formattedDateTime);
@@ -29,23 +29,23 @@ class FormatterTest extends TestCase
 
     public function testGetBriefDiffHorHumans(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T00:00:00");
-        $oneYearDifference = ExtendedDateTimeImmutable::create(
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T00:00:00");
+        $oneYearDifference = SilverHeadDateTimeImmutable::create(
             "2024-10-01T00:00:00"
         );
-        $oneMonthDifference = ExtendedDateTimeImmutable::create(
+        $oneMonthDifference = SilverHeadDateTimeImmutable::create(
             "2025-11-01T00:00:00"
         );
-        $oneDayDifference = ExtendedDateTimeImmutable::create(
+        $oneDayDifference = SilverHeadDateTimeImmutable::create(
             "2025-10-02T00:00:00"
         );
-        $oneHourDifference = ExtendedDateTimeImmutable::create(
+        $oneHourDifference = SilverHeadDateTimeImmutable::create(
             "2025-10-01T01:00:00"
         );
-        $oneMinuteDifference = ExtendedDateTimeImmutable::create(
+        $oneMinuteDifference = SilverHeadDateTimeImmutable::create(
             "2025-10-01T00:01:00"
         );
-        $oneSecondDifference = ExtendedDateTimeImmutable::create(
+        $oneSecondDifference = SilverHeadDateTimeImmutable::create(
             "2025-10-01T00:00:01"
         );
         $diffForYear = $dateTime->getBriefDiffHorHumans($oneYearDifference);
@@ -65,8 +65,8 @@ class FormatterTest extends TestCase
 
     public function testGetFullDiffForHumans(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T00:00:00");
-        $diffDateTime = ExtendedDateTimeImmutable::create(
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T00:00:00");
+        $diffDateTime = SilverHeadDateTimeImmutable::create(
             "2025-11-02T00:00:00"
         );
         $brief = $dateTime->getFullDiffForHumans($diffDateTime);
@@ -76,7 +76,7 @@ class FormatterTest extends TestCase
 
     public function testGetDate(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T00:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T00:00:00");
         $date = $dateTime->getDate();
 
         $this->assertSame("01.10.2025", $date);
@@ -84,7 +84,7 @@ class FormatterTest extends TestCase
 
     public function testGetDateUSFormat(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T0:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T0:00:00");
         $date = $dateTime->getDateUSFormat();
 
         $this->assertSame("2025.10.01", $date);
@@ -92,7 +92,7 @@ class FormatterTest extends TestCase
 
     public function testGetTime(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T12:30:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T12:30:00");
         $time = $dateTime->getTime();
 
         $this->assertSame("12:30:00", $time);
@@ -100,8 +100,8 @@ class FormatterTest extends TestCase
 
     public function testGetLastDayOfMonth(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-02-01T00:00:00");
-        $expectedLastDayOfMonth = ExtendedDateTimeImmutable::create(
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-02-01T00:00:00");
+        $expectedLastDayOfMonth = SilverHeadDateTimeImmutable::create(
             "2025-02-28T00:00:00"
         );
         $formattedLastDayOfMonth = $dateTime->getLastDayOfMonth();
@@ -114,7 +114,7 @@ class FormatterTest extends TestCase
 
     public function testGetLastDayOfMonthAsString(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-02-01T00:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-02-01T00:00:00");
         $formattedLastDayOfMonth = $dateTime->getLastDayOfMonthAsString();
 
         $this->assertSame(
@@ -125,7 +125,7 @@ class FormatterTest extends TestCase
 
     public function testGetLocaleStringDate(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create("2025-10-01T00:00:00");
+        $dateTime = SilverHeadDateTimeImmutable::create("2025-10-01T00:00:00");
         $localeDateString = $dateTime->getLocaleStringDate();
 
         $this->assertSame(
@@ -137,7 +137,7 @@ class FormatterTest extends TestCase
     public function testGetUnixTimestampSuccess(): void
     {
         $dateAsString = "2025-10-01T00:00:00";
-        $dateTime = ExtendedDateTimeImmutable::create($dateAsString);
+        $dateTime = SilverHeadDateTimeImmutable::create($dateAsString);
         ClockMock::freeze(new \DateTimeImmutable($dateAsString));
         $expectedUnix = time();
         ClockMock::reset();

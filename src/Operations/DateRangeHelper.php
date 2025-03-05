@@ -2,7 +2,7 @@
 
 namespace App\Operations;
 
-use App\ExtendedDateTimeImmutable;
+use App\SilverHeadDateTimeImmutable;
 use App\Operations\Enum\RangeStepEnum;
 
 class DateRangeHelper
@@ -19,11 +19,11 @@ class DateRangeHelper
     }
 
     /**
-     * @psalm-return array<int,ExtendedDateTimeImmutable>
+     * @psalm-return array<int,SilverHeadDateTimeImmutable>
      */
     public function getRangeArray(
-        ExtendedDateTimeImmutable $startDateTime,
-        ExtendedDateTimeImmutable $endDateTime,
+        SilverHeadDateTimeImmutable $startDateTime,
+        SilverHeadDateTimeImmutable $endDateTime,
         RangeStepEnum $step
     ): array {
         $this->validateDateRange(
@@ -40,7 +40,7 @@ class DateRangeHelper
             $incrementedDateTime = $currentDateTime->dateTime->add(
                 $intervalStep
             );
-            $currentDateTime = ExtendedDateTimeImmutable::create(
+            $currentDateTime = SilverHeadDateTimeImmutable::create(
                 $incrementedDateTime->format("c")
             );
         }
@@ -53,7 +53,7 @@ class DateRangeHelper
      */
     public function getRangeArrayOfStrings(
         \DateTimeImmutable $startDateTime,
-        ExtendedDateTimeImmutable $endDateTime,
+        SilverHeadDateTimeImmutable $endDateTime,
         RangeStepEnum $step
     ): array {
         $this->validateDateRange(

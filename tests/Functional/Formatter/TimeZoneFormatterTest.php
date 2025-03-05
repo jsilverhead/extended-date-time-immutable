@@ -2,7 +2,7 @@
 
 namespace App\Tests\Functional\Formatter;
 
-use App\ExtendedDateTimeImmutable;
+use App\SilverHeadDateTimeImmutable;
 use DateTimeZone;
 use PHPUnit\Framework\TestCase;
 
@@ -10,7 +10,7 @@ class TimeZoneFormatterTest extends TestCase
 {
     public function testConvertToTimeZone(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create(
+        $dateTime = SilverHeadDateTimeImmutable::create(
             dateTimeAsString: "2025-10-01 12:00:00",
             timeZone: "Europe/Paris"
         );
@@ -30,7 +30,7 @@ class TimeZoneFormatterTest extends TestCase
 
     public function testConvertToTimeZoneWithoutOffset(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create(
+        $dateTime = SilverHeadDateTimeImmutable::create(
             dateTimeAsString: "2025-10-01 12:00:00",
             timeZone: "Europe/Paris"
         );
@@ -52,7 +52,7 @@ class TimeZoneFormatterTest extends TestCase
 
     public function testGetTimezoneSuccess(): void
     {
-        $dateTime = ExtendedDateTimeImmutable::create();
+        $dateTime = SilverHeadDateTimeImmutable::create();
         $timeZone = $dateTime->getTimeZone();
 
         $this->assertInstanceOf(
@@ -64,7 +64,7 @@ class TimeZoneFormatterTest extends TestCase
     public function testGetTimezoneAsString(): void
     {
         $expectedTimeZone = "Europe/Paris";
-        $dateTime = ExtendedDateTimeImmutable::create(
+        $dateTime = SilverHeadDateTimeImmutable::create(
             timeZone: $expectedTimeZone
         );
         $timeZone = $dateTime->getTimeZoneAsString();
