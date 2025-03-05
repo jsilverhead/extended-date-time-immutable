@@ -27,8 +27,11 @@ class ListLocalesCommand extends Command
         $resultTable->setHeaders(["#", "Locale"]);
 
         foreach ($localeFiles as $key => $localeFile) {
-            $localeFile = basename($localeFile);
-            $localeFile = str_replace(".json", "", $localeFile);
+            $localeFile = str_replace(
+                ["TimeMeasuresLocale_", ".json"],
+                "",
+                basename($localeFile)
+            );
             $resultTable->addRow([++$key, $localeFile]);
         }
 

@@ -11,7 +11,7 @@ use App\Operations\DateRangeHelper;
 use App\Operations\DateComparator;
 use DateTimeImmutable;
 
-class ExtendedDateTimeImmutable
+class SilverHeadDateTimeImmutable
 {
     public \DateTimeImmutable $dateTime;
     private ArithmeticalOperations $arithmeticalOperations;
@@ -88,7 +88,7 @@ class ExtendedDateTimeImmutable
      */
     public function changeTimeZoneWithoutChangingTime(
         string $timezone
-    ): ExtendedDateTimeImmutable {
+    ): SilverHeadDateTimeImmutable {
         $convertedDateTime = $this->timeZoneFormatter->changeTimeZoneWithoutChangingTime(
             dateTime: $this->dateTime,
             timezone: $timezone
@@ -342,7 +342,7 @@ class ExtendedDateTimeImmutable
     }
 
     public function getBriefDiffHorHumans(
-        ExtendedDateTimeImmutable $dateTime
+        SilverHeadDateTimeImmutable $dateTime
     ): string {
         return $this->formatter->getBriefDiffHorHumans(
             coreDateTime: $this->dateTime,
@@ -351,7 +351,7 @@ class ExtendedDateTimeImmutable
     }
 
     public function getFullDiffForHumans(
-        ExtendedDateTimeImmutable $dateTime,
+        SilverHeadDateTimeImmutable $dateTime,
         string $locale = "en"
     ): string {
         return $this->formatter->getFullDiffForHumans(
@@ -376,7 +376,7 @@ class ExtendedDateTimeImmutable
         return $this->formatter->getTime($this->dateTime);
     }
 
-    public function getLastDayOfMonth(): ExtendedDateTimeImmutable
+    public function getLastDayOfMonth(): SilverHeadDateTimeImmutable
     {
         return $this->formatter->getLastDayOfMonth($this->dateTime);
     }
@@ -391,7 +391,7 @@ class ExtendedDateTimeImmutable
         return $this->formatter->getLocaleStringDate($this->dateTime);
     }
 
-    public function isBefore(ExtendedDateTimeImmutable $dateTime): bool
+    public function isBefore(SilverHeadDateTimeImmutable $dateTime): bool
     {
         return $this->dateComparator->isBefore(
             coreDate: $this->dateTime,
@@ -399,7 +399,7 @@ class ExtendedDateTimeImmutable
         );
     }
 
-    public function isAfter(ExtendedDateTimeImmutable $dateTime): bool
+    public function isAfter(SilverHeadDateTimeImmutable $dateTime): bool
     {
         return $this->dateComparator->isAfter(
             coreDate: $this->dateTime,
@@ -407,7 +407,7 @@ class ExtendedDateTimeImmutable
         );
     }
 
-    public function isSame(ExtendedDateTimeImmutable $dateTime): bool
+    public function isSame(SilverHeadDateTimeImmutable $dateTime): bool
     {
         return $this->dateComparator->isSame(
             coreDate: $this->dateTime,
@@ -416,8 +416,8 @@ class ExtendedDateTimeImmutable
     }
 
     public function isInRange(
-        ExtendedDateTimeImmutable $startDate,
-        ExtendedDateTimeImmutable $endDate
+        SilverHeadDateTimeImmutable $startDate,
+        SilverHeadDateTimeImmutable $endDate
     ): bool {
         return $this->dateComparator->isInRange(
             initialDateTime: $this->dateTime,
@@ -427,7 +427,7 @@ class ExtendedDateTimeImmutable
     }
 
     public function getRangeArray(
-        ExtendedDateTimeImmutable $endDateTime,
+        SilverHeadDateTimeImmutable $endDateTime,
         RangeStepEnum $step
     ): array {
         return $this->dateRangeHelper->getRangeArray(
@@ -438,7 +438,7 @@ class ExtendedDateTimeImmutable
     }
 
     public function getRangeArrayOfStrings(
-        ExtendedDateTimeImmutable $endDateTime,
+        SilverHeadDateTimeImmutable $endDateTime,
         RangeStepEnum $step
     ): array {
         return $this->dateRangeHelper->getRangeArrayOfStrings(
@@ -448,9 +448,14 @@ class ExtendedDateTimeImmutable
         );
     }
 
-    public static function createRandomDate(): self
-    {
-        $randomDateTime = self::calculateRandomDate();
+    public static function createRandomDate(
+        int $fromYear = 1700,
+        int $toYear = 5000
+    ): self {
+        $randomDateTime = self::calculateRandomDate(
+            fromYear: $fromYear,
+            toYear: $toYear
+        );
 
         return self::createInternal($randomDateTime);
     }
@@ -475,9 +480,11 @@ class ExtendedDateTimeImmutable
         return $this->arithmeticalOperations->getAge($this->dateTime);
     }
 
-    private static function calculateRandomDate(): \DateTimeImmutable
-    {
-        $year = random_int(min: 1700, max: 5000);
+    private static function calculateRandomDate(
+        int $fromYear,
+        int $toYear
+    ): \DateTimeImmutable {
+        $year = random_int(min: $fromYear, max: $toYear);
         $month = random_int(1, 12);
         $day = 0;
 
