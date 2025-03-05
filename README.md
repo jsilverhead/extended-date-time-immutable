@@ -1,13 +1,13 @@
-## Extended DateTimeImmutable
-Это скромная библиотека, где обёртка `ExtendedDateTimeImmutable` помогает расширить и упростить работу с объектами `DateTimeImmutable`.
+## SilverHead DateTimeImmutable
+Это скромная библиотека, где обёртка `SilverHeadDateTimeImmutable` помогает расширить и упростить работу с объектами `DateTimeImmutable`.
 
 ### Включает методы:
 
 ### Создание объекта:
 Объект создаётся путём нескольких статичных методов:
-- `ExtendedDateTimeImmutable::create` - аналогично `DateTimeImmutable` принимает строку и пытается сформировать из неё `ExtendedDateTimeImmutable`
-- `ExtendedDateTimeImmutable::createRandomDate` - создаёт `ExtendedDateTimeImmutable` с рандомной датой от 1700 до 5000 года.
-- `ExtendedDateTimeImmutable::createFromUnixStamp` - принимает Unix int и пытается сфомировать `ExtendedDateTimeImmutable` 
+- `SilverHeadDateTimeImmutable::create` - аналогично `DateTimeImmutable` принимает строку и пытается сформировать из неё `SilverHeadDateTimeImmutable`
+- `SilverHeadDateTimeImmutable::createRandomDate` - создаёт `SilverHeadDateTimeImmutable` с рандомной датой от 1700 до 5000 года.
+- `SilverHeadDateTimeImmutable::createFromUnixStamp` - принимает Unix int и пытается сфомировать `SilverHeadDateTimeImmutable` 
 
 #### Форматирование:
 - `toFormattedDateTime` - Возвращает дату в формате rfc2822
