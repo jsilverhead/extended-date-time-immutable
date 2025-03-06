@@ -3,35 +3,39 @@
 namespace App\HolidayManager;
 
 use App\HolidayManager\Enum\WeekDaysEnum;
+use Symfony\Component\HttpFoundation\Exception\JsonException;
 
 class HolidayManager
 {
-    public const HOLIDAYS = [
-        "01.01" => "New Year Holidays",
-        "01.02" => "New Year Holidays",
-        "01.03" => "New Year Holidays",
-        "01.04" => "New Year Holidays",
-        "01.05" => "New Year Holidays",
-        "01.06" => "New Year Holidays",
-        "01.07" => "New Year Holidays",
-        "02.23" => "Men's Day",
-        "03.08" => "Women's Day",
-        "05.09" => "WW2 Victory Day",
-        "06.12" => "Russia Day",
-        "11.04" => "Union Day",
-        "31.12" => "New Year Eve",
-    ];
+    private array $holidays = [];
 
-    // TODO: Добавь праздники на разные локали
-    public function isHoliday(\DateTimeImmutable $date): bool
+    /**
+     * @psalm-param non-empty-string $country
+     * @throws \JsonException
+     */
+    public function isHoliday(\DateTimeImmutable $date, string $country): bool
     {
-        return array_key_exists($date->format("m.d"), self::HOLIDAYS);
+        if (!$this->holidays) {
+            $this->holidays = $this->getHolidaysFileContents($country);
+        }
+
+        return array_key_exists($date->format("m.d"), $this->holidays);
     }
 
-    public function whatHoliday(\DateTimeImmutable $date): string
-    {
-        if ($this->isHoliday($date)) {
-            return self::HOLIDAYS[$date->format("m.d")];
+    /**
+     * @psalm-param non-empty-string $country
+     * @throws \JsonException
+     */
+    public function whatHoliday(
+        \DateTimeImmutable $date,
+        string $country
+    ): string {
+        if (!$this->holidays) {
+            $this->holidays = $this->getHolidaysFileContents($country);
+        }
+
+        if ($this->isHoliday(date: $date, country: $country)) {
+            return $this->holidays[$date->format("m.d")];
         }
 
         return "No Holidays.";
@@ -46,5 +50,30 @@ class HolidayManager
             WeekDaysEnum::SUNDAY->value => true,
             default => false,
         };
+    }
+
+    private function getHolidaysFileContents(string $country): array
+    {
+        $path = getcwd() . "/public/holidays/";
+
+        if (!is_dir($path)) {
+            throw new \LogicException("Path not found: " . $path);
+        }
+
+        $file = file_get_contents($path . $country . ".json");
+
+        if (is_file($file)) {
+            throw new \LogicException(
+                "Holidays file do not exists. Please check the spelling."
+            );
+        }
+
+        try {
+            $contents = json_decode($file, true);
+        } catch (JsonException $e) {
+            throw new \JsonException("Invalid JSON: " . $e->getMessage());
+        }
+
+        return $contents;
     }
 }

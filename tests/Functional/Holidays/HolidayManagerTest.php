@@ -11,7 +11,7 @@ class HolidayManagerTest extends TestCase
     {
         $holidayDate = SilverHeadDateTimeImmutable::create("01.01.2025");
 
-        $this->assertTrue($holidayDate->isHoliday());
+        $this->assertTrue($holidayDate->isHoliday("Russia"));
     }
 
     public function testWhatHolidaySuccess(): void
@@ -19,8 +19,8 @@ class HolidayManagerTest extends TestCase
         $holidayDate = SilverHeadDateTimeImmutable::create("09.05.2025");
 
         $this->assertSame(
-            expected: "WW2 Victory Day",
-            actual: $holidayDate->whatHoliday()
+            expected: "День победы",
+            actual: $holidayDate->whatHoliday("Russia")
         );
     }
 

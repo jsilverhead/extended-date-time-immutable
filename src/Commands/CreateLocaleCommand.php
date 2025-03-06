@@ -10,7 +10,7 @@ use Symfony\Component\Console\Question\Question;
 
 class CreateLocaleCommand extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName("app:create-locale");
         $this->setDescription("Create a new locale");
@@ -489,13 +489,19 @@ class CreateLocaleCommand extends Command
             "december" => $decemberAnswer,
         ];
 
-        $directory = getcwd() . "/public/locale";
+        $path = getcwd() . "/public/locale/";
 
-        if (!is_dir($directory)) {
-            mkdir($directory, 0777, true);
+        if (!is_dir($path)) {
+            mkdir($path, 0777, true);
         }
 
-        $file = $directory . "/TimeMeasuresLocale_" . $localeName . ".json";
+        $file = $path . "TimeMeasuresLocale_" . $localeName . ".json";
+
+        if (file_exists($file)) {
+            $output->writeln("<error>Locale file already exists.</error>");
+
+            return Command::FAILURE;
+        }
 
         if (
             file_put_contents(

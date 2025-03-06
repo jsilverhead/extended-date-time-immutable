@@ -467,14 +467,26 @@ class SilverHeadDateTimeImmutable
         return self::createInternal($randomDateTime);
     }
 
-    public function isHoliday(): bool
+    /**
+     * @psalm-param non-empty-string $country
+     */
+    public function isHoliday(string $country): bool
     {
-        return $this->holidayManager->isHoliday($this->dateTime);
+        return $this->holidayManager->isHoliday(
+            date: $this->dateTime,
+            country: $country
+        );
     }
 
-    public function whatHoliday(): string
+    /**
+     * @psalm-param non-empty-string $country
+     */
+    public function whatHoliday(string $country): string
     {
-        return $this->holidayManager->whatHoliday($this->dateTime);
+        return $this->holidayManager->whatHoliday(
+            date: $this->dateTime,
+            country: $country
+        );
     }
 
     public function isWeekend(): bool
